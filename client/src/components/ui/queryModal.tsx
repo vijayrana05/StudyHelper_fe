@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { askAi } from "../../features/askAi"; // adjust path as needed
 import { searchAi } from "../../features/queryNotes";
 
 interface queryNotesModalProps {
