@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Search, Sparkles, FileText, Zap, ArrowRight, Brain, Shield, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Sparkles, FileText, Zap, ArrowRight, Brain } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 const NotesLandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,26 +34,7 @@ const NotesLandingPage = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Chen",
-      role: "Product Manager",
-      content: "This completely transformed how I organize my thoughts. The AI suggestions are incredibly intuitive.",
-      rating: 5
-    },
-    {
-      name: "Marcus Thompson",
-      role: "Research Scientist",
-      content: "The search functionality is phenomenal. I can find connections between notes I never noticed before.",
-      rating: 5
-    },
-    {
-      name: "Elena Rodriguez",
-      role: "Student",
-      content: "Perfect for managing lecture notes and research. The AI helps me create better summaries than I ever could.",
-      rating: 5
-    }
-  ];
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50 text-slate-900 overflow-hidden">

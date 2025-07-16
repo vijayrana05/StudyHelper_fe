@@ -26,13 +26,13 @@ function SideCard({
     color,
     fav,
     createdAt,
-    updatedAt,
+    // updatedAt,
     // isSelected = false
 }: SideCardProps) {
 
     const navigate = useNavigate();
     createdAt = createdAt.slice(0, 10)
-    const updatedDate = updatedAt.slice(0, 10)
+    // const updatedDate = updatedAt.slice(0, 10)
     const [isSelected,setIsSelected] = useState(false)
     // Memoize HTML generation since it's expensive
     const html = useMemo(() => {

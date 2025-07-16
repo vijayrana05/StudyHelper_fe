@@ -1,7 +1,7 @@
-import React, { useState, type FormEvent, type ChangeEvent } from 'react';
+import React, { useState,  type ChangeEvent } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
 import { FaSignInAlt, FaEnvelope, FaLock } from 'react-icons/fa';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import Loader from '../components/loader';
 
 const LoginPage: React.FC = () => {
@@ -9,7 +9,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
   // const [loading, setLoading] = useState(false); // Add this line
-
+  console.log(message)
   const navigate = useNavigate()
   // Handles the form submission
   const handleLogin = async (e: any) => {

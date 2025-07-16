@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { askAi } from "../../features/askAi"; // adjust path as needed
-import Loader from "./loader";
 
 interface AskAiModalProps {
   isOpenAskAi: boolean;

@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent, type ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
 import { FaUserPlus, FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
