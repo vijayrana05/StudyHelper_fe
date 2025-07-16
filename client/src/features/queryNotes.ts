@@ -1,4 +1,6 @@
-const API_URL = "https://studyhelper-be-1.onrender.com";
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://studyhelper-be-1.onrender.com'
+  : 'http://localhost:5000';
 
 
 export async function searchAi(noteId: string, query: string): Promise<string> {

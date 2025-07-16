@@ -2,7 +2,9 @@ import React, { useState,  type ChangeEvent } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
 import { FaSignInAlt, FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-const API_URL = "https://studyhelper-be-1.onrender.com";
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://studyhelper-be-1.onrender.com'
+  : 'http://localhost:5000';
 
 // import Loader from '../components/loader';
 
