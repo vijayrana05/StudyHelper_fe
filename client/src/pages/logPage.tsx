@@ -2,6 +2,8 @@ import React, { useState,  type ChangeEvent } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
 import { FaSignInAlt, FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+const API_URL = "https://studyhelper-be-1.onrender.com";
+
 // import Loader from '../components/loader';
 
 const LoginPage: React.FC = () => {
@@ -16,7 +18,7 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     // setLoading(true); // show loader
     try {
-      const response = await fetch("http://localhost:5000/api/authRoutes/login", {
+      const response = await fetch(`${API_URL}/api/authRoutes/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

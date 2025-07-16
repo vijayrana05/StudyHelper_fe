@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
 import { FaUserPlus, FaEnvelope, FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+const API_URL = "https://studyhelper-be-1.onrender.com";
+
 
 const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState("")
@@ -43,7 +45,7 @@ const SignUpPage: React.FC = () => {
 
     try {
       console.log("test3")
-      const response = await fetch("http://localhost:5000/api/authRoutes/signup", {
+      const response = await fetch(`${API_URL}/api/authRoutes/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
