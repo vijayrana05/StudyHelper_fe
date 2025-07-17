@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
-import { FaUserPlus, FaLock } from 'react-icons/fa';
+import { FaUserPlus, FaLock, FaTimes, FaExclamationTriangle } from 'react-icons/fa';
 import { FaUser } from "react-icons/fa";
 
 import { useNavigate } from 'react-router-dom';
@@ -14,21 +14,8 @@ const SignUpPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
   const [username, setUserName] = useState("")
+  const [showErrorNotification, setShowErrorNotification] = useState(false);
   const navigate = useNavigate()
-  // // Handles the form submission
-  // const handleSubmit = (e: FormEvent) => {
-  //   e.preventDefault();
-  //   // In a real application, you would send this data to your backend for user registration.
-  //   // For now, we'll just log it to the console.
-
-  //   if (password !== confirmPassword) {
-  //     // In a real application, replace this with a custom modal or inline error message.
-  //     // Using console.error for demonstration.
-  //     console.error("Passwords do not match!");
-  //     return;
-  //   }
-  //   // Add your actual sign-up logic here (e.g., API call, user creation service)
-  // };
 
   // Framer Motion variants for the main form container
   const formVariants: Variants = { // Explicitly type as Variants
@@ -44,6 +31,22 @@ const SignUpPage: React.FC = () => {
       },
     },
   };
+
+  // Notification animation variants
+  const notificationVariants: Variants = {
+    hidden: { x: '100%', opacity: 0 },
+    visible: { 
+      x: 0, 
+      opacity: 1, 
+      transition: { duration: 0.3, ease: "easeOut" } 
+    },
+    exit: { 
+      x: '100%', 
+      opacity: 0, 
+      transition: { duration: 0.3 } 
+    }
+  };
+
   const handleSignup = async (e: any) => {
     e.preventDefault();
 
@@ -57,7 +60,6 @@ const SignUpPage: React.FC = () => {
         body: JSON.stringify({ username,  password }),
       });
 
-      console.log("test2")
 
       const data = await response.json();
 
@@ -65,14 +67,29 @@ const SignUpPage: React.FC = () => {
       console.log("Response Data:", data);
       console.log(message)
       if (response.ok) {
-
         setMessage("Signup successful!");
+        // You might want to redirect to login or dashboard here
+        // navigate("/login");
       } else {
         setMessage(data.message || "Signup failed.");
+        setShowErrorNotification(true);
+        // Auto-hide notification after 5 seconds
+        setTimeout(() => {
+          setShowErrorNotification(false);
+        }, 5000);
       }
     } catch (error) {
       setMessage("An error occurred. Please try again.");
+      setShowErrorNotification(true);
+      // Auto-hide notification after 5 seconds
+      setTimeout(() => {
+        setShowErrorNotification(false);
+      }, 5000);
     }
+  };
+
+  const closeErrorNotification = () => {
+    setShowErrorNotification(false);
   };
 
   // Framer Motion variants for input fields
@@ -125,7 +142,6 @@ const SignUpPage: React.FC = () => {
           </motion.div>
        
 
-
           {/* Password input field */}
           <motion.div variants={inputVariants}>
             <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-2">Password</label>
@@ -144,8 +160,6 @@ const SignUpPage: React.FC = () => {
               />
             </div>
           </motion.div>
-
-
 
           {/* Sign Up button */}
           <motion.button
@@ -174,6 +188,45 @@ const SignUpPage: React.FC = () => {
           </span>
         </motion.p>
       </motion.div>
+
+      {/* Error Notification Toast */}
+      {showErrorNotification && (
+        <div className="fixed top-4 right-4 z-50">
+          <motion.div
+            className="bg-red-500 text-white rounded-lg shadow-lg p-4 w-80 max-w-sm relative overflow-hidden"
+            variants={notificationVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <div className="flex items-start justify-between mb-2">
+              <div className="flex items-center">
+                <FaExclamationTriangle className="text-white text-lg mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-sm">Signup Failed</h4>
+                  <p className="text-sm text-red-100 mt-1">{message}</p>
+                </div>
+              </div>
+              <button
+                onClick={closeErrorNotification}
+                className="text-red-200 hover:text-white transition duration-200 flex-shrink-0 ml-2"
+              >
+                <FaTimes />
+              </button>
+            </div>
+            
+            {/* Progress bar */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600">
+              <motion.div
+                className="h-full bg-red-300"
+                initial={{ width: '100%' }}
+                animate={{ width: '0%' }}
+                transition={{ duration: 5, ease: "linear" }}
+              />
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
