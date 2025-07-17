@@ -3,6 +3,8 @@ import { motion, type Variants } from 'framer-motion'; // Import Variants type
 import { FaSignInAlt,  FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
+import { FaTimes } from 'react-icons/fa';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 const API_URL = process.env.NODE_ENV === 'production' 
   ? 'https://studyhelper-be-1.onrender.com'
@@ -14,7 +16,23 @@ const LoginPage: React.FC = () => {
   const [username, setUserName] = useState("")
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
+  const [showErrorNotification, setShowErrorNotification] = useState(false);
   // const [loading, setLoading] = useState(false); // Add this line
+
+  
+    const notificationVariants: Variants = {
+      hidden: { x: '100%', opacity: 0 },
+      visible: {
+        x: 0,
+        opacity: 1,
+        transition: { duration: 0.3, ease: "easeOut" }
+      },
+      exit: {
+        x: '100%',
+        opacity: 0,
+        transition: { duration: 0.3 }
+      }
+    };
   console.log(message)
   const navigate = useNavigate()
   // Handles the form submission
@@ -42,11 +60,16 @@ const LoginPage: React.FC = () => {
         navigate(`/home`);
       } else {
         setMessage(data.message || "Signin failed.");
+        setShowErrorNotification(true);
+        setTimeout(() => setShowErrorNotification(false), 5000);
       }
     } catch (error) {
       setMessage("An error occurred. Please try again.");
+      setShowErrorNotification(true);
+      setTimeout(() => setShowErrorNotification(false), 5000);
     } 
   };
+  const closeErrorNotification = () => setShowErrorNotification(false);
   // Framer Motion variants for the main form container
   const formVariants: Variants = { // Explicitly type as Variants
     hidden: { opacity: 0, y: 50 },
@@ -158,6 +181,42 @@ const LoginPage: React.FC = () => {
           </span>
         </motion.p>
       </motion.div>
+            {showErrorNotification && (
+              <div className="fixed top-4 right-4 z-50">
+                <motion.div
+                  className="bg-red-500 text-white rounded-lg shadow-lg p-4 w-80 max-w-sm relative overflow-hidden"
+                  variants={notificationVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center">
+                      <FaExclamationTriangle className="text-white text-lg mr-3 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-sm">Login Failed</h4>
+                        <p className="text-sm text-red-100 mt-1">{message}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={closeErrorNotification}
+                      className="text-red-200 hover:text-white transition duration-200 flex-shrink-0 ml-2"
+                    >
+                      <FaTimes />
+                    </button>
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600">
+                    <motion.div
+                      className="h-full bg-red-300"
+                      initial={{ width: '100%' }}
+                      animate={{ width: '0%' }}
+                      transition={{ duration: 5, ease: "linear" }}
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            )}
+      
     </div>
   );
 };
