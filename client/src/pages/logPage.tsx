@@ -1,7 +1,9 @@
 import React, { useState,  type ChangeEvent } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
-import { FaSignInAlt, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaSignInAlt,  FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
+
 const API_URL = process.env.NODE_ENV === 'production' 
   ? 'https://studyhelper-be-1.onrender.com'
   : 'http://localhost:5000';
@@ -9,7 +11,7 @@ const API_URL = process.env.NODE_ENV === 'production'
 // import Loader from '../components/loader';
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState("")
+  const [username, setUserName] = useState("")
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
   // const [loading, setLoading] = useState(false); // Add this line
@@ -25,7 +27,7 @@ const LoginPage: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
@@ -92,17 +94,17 @@ const LoginPage: React.FC = () => {
         <form onSubmit={handleLogin} className="space-y-6">
           {/* Email input field */}
           <motion.div variants={inputVariants}>
-            <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
+            <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">User Name</label>
             <div className="relative">
-              <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
-                type="email"
-                id="email"
+                type="text"
+                id="user name"
                 className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition duration-200"
-                placeholder="you@example.com"
-                value={email}
+                placeholder="Enter  you user name"
+                value={username}
                 onChange={(e) => {
-                  setEmail(e.target.value)
+                  setUserName(e.target.value)
                 }}
                 required
               />
@@ -139,15 +141,7 @@ const LoginPage: React.FC = () => {
         </form>
 
         {/* Forgot password link */}
-        <motion.p
-          className="text-center text-gray-600 mt-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { delay: 0.8 } }}
-        >
-          <a href="/forgot-password" className="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-200">
-            Forgot Password?
-          </a>
-        </motion.p>
+       
 
         {/* Sign up link */}
         <motion.p

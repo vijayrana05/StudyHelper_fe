@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion'; // Import Variants type
-import { FaUserPlus, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaUserPlus, FaLock } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
+
 import { useNavigate } from 'react-router-dom';
 const API_URL = process.env.NODE_ENV === 'production' 
   ? 'https://studyhelper-be-1.onrender.com'
@@ -8,10 +10,10 @@ const API_URL = process.env.NODE_ENV === 'production'
 
 
 const SignUpPage: React.FC = () => {
-  const [email, setEmail] = useState("")
+
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
-  const [name, setName] = useState("")
+  const [username, setUserName] = useState("")
   const navigate = useNavigate()
   // // Handles the form submission
   // const handleSubmit = (e: FormEvent) => {
@@ -52,7 +54,7 @@ const SignUpPage: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ username,  password }),
       });
 
       console.log("test2")
@@ -107,37 +109,21 @@ const SignUpPage: React.FC = () => {
           <motion.div variants={inputVariants}>
             <label  className="block text-gray-700 text-sm font-medium mb-2">User Name</label>
             <div className="relative">
-              <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                id="name"
+                id="User Name"
                 className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition duration-200"
-                placeholder=""
-                value={name}
+                placeholder="Enter your user name"
+                value={username}
                 onChange={(e) => {
-                  setName(e.target.value)
+                  setUserName(e.target.value)
                 }}
                 required
               />
             </div>
           </motion.div>
-          <motion.div variants={inputVariants}>
-            <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
-            <div className="relative">
-              <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="email"
-                id="email"
-                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition duration-200"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
-                required
-              />
-            </div>
-          </motion.div>
+       
 
 
           {/* Password input field */}
