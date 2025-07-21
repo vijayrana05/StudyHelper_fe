@@ -36,7 +36,7 @@ function SideBar({ setIsSidebarOpen }: SideBarProps = {}) {
         <div className="flex justify-center min-h-screen relative pt-10">
             {/* Floating Action Button */}
             <motion.div
-                className="flex items-center justify-center bg-black rounded-full lg:w-14 lg:h-14 md:w-13 md:h-13 h-12 w-12 cursor-pointer z-10"
+                className="flex items-center justify-center bg-black rounded-full lg:w-14 lg:h-14 md:w-13 md:h-13 h-10 w-10 cursor-pointer z-10"
                 animate={{ rotate: isMenuOpen ? 45 : 0 }}
                 transition={{ duration: 0.3 }}
                 onClick={handleMenuToggle}
