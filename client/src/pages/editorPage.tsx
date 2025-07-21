@@ -105,7 +105,7 @@ export function EditorPage() {
 
                 <Toolbar editor={editor} setModalOpen={setModalOpen} setAskAiModalOpen={(setAskAiModalOpen)} setQueryNotesModalOpen={(setQueryNotesModalOpen)} />
 
-                <div className=" rounded-lg   mt-6 ">
+                <div className=" rounded-lg ml-2  mt-6 ">
                     <EditorContent editor={editor} className="tiptap min-h-130 sm:pl-5 md:8  pt-3 cursor-white  overflow-y-scroll " />
                 </div>
                 <Modal
