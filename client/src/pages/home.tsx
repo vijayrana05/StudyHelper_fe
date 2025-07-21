@@ -54,8 +54,8 @@ function GridLayout({ isSidebarOpen }: { isSidebarOpen: boolean }) {
       isSidebarOpen ? 'lg:ml-0 ml-16' : 'lg:ml-0 ml-0'
     }`}>
       <div className="flex justify-center mt-10">
-        <div className="sm:w-120 sm:h-40 justify-between w-80 h-40 flex items-center">
-          <div className="sm:w-45 sm:h-45 w-30 h-30 text-left border-4 flex items-center justify-center rounded-3xl border-dashed">
+        <div className="sm:w-120 sm:h-40   gap-3 justify-between w-60  h-40 flex items-center">
+          <div className="sm:w-45 sm:h-45 w-30 h-30  text-left border-4  flex items-center justify-center rounded-3xl border-dashed">
             <MdNoteAdd className="sm:text-8xl text-6xl" onClick={() => {
               navigate("/editor")
             }} />
