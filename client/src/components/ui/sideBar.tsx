@@ -33,7 +33,7 @@ function SideBar({ setIsSidebarOpen }: SideBarProps = {}) {
     };
 
     return (
-        <div className="flex justify-center min-h-screen relative pt-10">
+        <div className="flex sm:justify-center pl-1  min-h-screen relative pt-10">
             {/* Floating Action Button */}
             <motion.div
                 className="flex items-center justify-center bg-black rounded-full lg:w-14 lg:h-14 md:w-13 md:h-13 h-10 w-10 cursor-pointer z-10"
