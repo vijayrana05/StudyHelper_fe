@@ -78,7 +78,7 @@ export const useNotesStore = create<NotesState>((set) => ({
         notes: [response.data, ...state.notes],
       }));
 
-      alert("Saved to DB!");
+      // alert("Saved to DB!");
     } catch (err) {
       console.error("Error saving note", err);
     }

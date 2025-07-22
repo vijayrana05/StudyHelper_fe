@@ -6,6 +6,7 @@ import { useNotesStore } from "../store/notesStore";
 import { useNavigate } from "react-router-dom";
 import PdfUpload from "../components/ui/pdfUpload";
 import Loader from "../components/ui/loader";
+import { usePdfStore } from "../store/pdfStore";
 
 export function Main() {
   // const { userId } = useParams();
@@ -13,6 +14,7 @@ export function Main() {
   // console.log("rendedring")
   const fetchNotes = useNotesStore((state) => state.fetchNotes)
   const loading = useNotesStore((state) => state.loading)
+  const pdfLoading = usePdfStore((state) => state.loading)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function Main() {
     // console.log("notes lenght isndie home is = ",notes.length)
   }, [notes.length, fetchNotes]);
 
-  if (loading) {
+  if (loading || pdfLoading) {
     return <Loader />
   }
 
