@@ -76,7 +76,7 @@ const NotesLandingPage = () => {
             <button className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg" onClick={() => {
                 navigate('/signup')
               }}>
-              Sign In
+              Sign Up
             </button>
             <button className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg" onClick={() => {
                 navigate('/login')

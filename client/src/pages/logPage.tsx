@@ -177,7 +177,7 @@ const LoginPage: React.FC = () => {
             onClick={() => navigate("/signup")}
             className="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-200 cursor-pointer"
           >
-            Log In
+            Sign Up
           </span>
         </motion.p>
       </motion.div>
