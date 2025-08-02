@@ -57,11 +57,11 @@ export function EditorPage() {
     const fetchNotes = useNotesStore((state) => state.fetchNotes)
 
     useEffect(() => {
-        if (notes.length === 0) {
+       
             fetchNotes();
             // console.log("fetchnotes runs inside editor page", notes.length)
             // console.log("fetchnotes occured")
-        }
+        
         // console.log("isnide fetchnotes use effect")
     }, [notes.length, fetchNotes]);
 

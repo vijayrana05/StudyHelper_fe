@@ -8,7 +8,10 @@ import PdfUpload from "../components/ui/pdfUpload";
 import Loader from "../components/ui/loader";
 import { usePdfStore } from "../store/pdfStore";
 
+
+
 export function Main() {
+
   // const { userId } = useParams();
   const notes = useNotesStore((state) => state.notes);
   // console.log("rendedring")
@@ -18,10 +21,10 @@ export function Main() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (notes.length === 0) {
+   
       fetchNotes();
       // console.log("fetchnotes occured isndie home")
-    }
+    
     // console.log("notes lenght isndie home is = ",notes.length)
   }, [notes.length, fetchNotes]);
 
