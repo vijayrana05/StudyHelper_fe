@@ -38,7 +38,6 @@ const NotesLandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50 text-slate-900 overflow-hidden">
-      {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-pulse"
@@ -58,7 +57,6 @@ const NotesLandingPage = () => {
         />
       </div>
 
-      {/* Navigation */}
       <nav className={`relative z-10 px-6 py-4 transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-2">
