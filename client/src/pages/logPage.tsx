@@ -4,6 +4,7 @@ import { FaSignInAlt,  FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import { FaTimes } from 'react-icons/fa';
+import Loader from '../components/ui/loader';
 import { FaExclamationTriangle } from 'react-icons/fa';
 
 const API_URL = process.env.NODE_ENV === 'production' 
@@ -17,7 +18,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("")
   const [showErrorNotification, setShowErrorNotification] = useState(false);
-  // const [loading, setLoading] = useState(false); // Add this line
+  const [loading, setLoading] = useState(false);
 
   
     const notificationVariants: Variants = {
@@ -35,10 +36,9 @@ const LoginPage: React.FC = () => {
     };
   console.log(message)
   const navigate = useNavigate()
-  // Handles the form submission
-  const handleLogin = async (e: any) => {
+    const handleLogin = async (e: any) => {
     e.preventDefault();
-    // setLoading(true); // show loader
+    setLoading(true); 
     try {
       const response = await fetch(`${API_URL}/api/authRoutes/login`, {
         method: "POST",
@@ -62,41 +62,43 @@ const LoginPage: React.FC = () => {
         setMessage(data.message || "Signin failed.");
         setShowErrorNotification(true);
         setTimeout(() => setShowErrorNotification(false), 5000);
+        setLoading(false); 
       }
     } catch (error) {
       setMessage("An error occurred. Please try again.");
       setShowErrorNotification(true);
       setTimeout(() => setShowErrorNotification(false), 5000);
-    } 
+      setLoading(false); 
+    }
   };
+  if (loading) {
+    return <Loader />;
+  }
   const closeErrorNotification = () => setShowErrorNotification(false);
-  // Framer Motion variants for the main form container
-  const formVariants: Variants = { // Explicitly type as Variants
+  const formVariants: Variants = { 
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.7,
-        ease: "easeOut", // Changed to string literal for compatibility
-        when: 'beforeChildren', // Animate parent before children
-        staggerChildren: 0.1,   // Stagger animation for child elements
+        ease: "easeOut", 
+        when: 'beforeChildren',
+        staggerChildren: 0.1,   
       },
     },
   };
 
-  // Framer Motion variants for input fields
-  const inputVariants: Variants = { // Explicitly type as Variants
+  const inputVariants: Variants = { 
     hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
   };
 
-  // Framer Motion variants for buttons, including hover and tap effects
-  const buttonVariants: Variants = { // Explicitly type as Variants
+  const buttonVariants: Variants = { 
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }, // Changed to string literal for compatibility
-    hover: { scale: 1.03, boxShadow: '0 8px 20px rgba(124, 58, 237, 0.4)' }, // Scale up and add shadow on hover
-    tap: { scale: 0.97 }, // Slightly shrink on tap for feedback
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }, 
+    hover: { scale: 1.03, boxShadow: '0 8px 20px rgba(124, 58, 237, 0.4)' }, 
+    tap: { scale: 0.97 }, 
   };
 
   return (

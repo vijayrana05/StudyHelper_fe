@@ -17,7 +17,6 @@ import '../App.css'
 const extensions = [
     StarterKit,
     Underline
-    // ✅ this fixes your issue
 ];
 
 
@@ -25,7 +24,6 @@ export function EditorPage() {
     const location = useLocation();
     const { _id, content, subject, title } = location.state || { content: { type: "doc", content: [] } };
     let hasInitializedContent = useRef(false);
-    // console.log(subject)
     const sideCardSelected = location.state;
     if (sideCardSelected) {
         hasInitializedContent.current = false
@@ -34,12 +32,12 @@ export function EditorPage() {
     const setSubject = useNotesStore((state) => state.setSubject);
     useEffect(() => {
         if (subject) {
-            setSubject(subject); // Keep the store in sync with the editor note
+            setSubject(subject); 
         }
     }, [subject]);
     useEffect(() => {
         if (title) {
-            setTitle(title); // Keep the store in sync with the editor note
+            setTitle(title); 
         }
     }, [title]);
 
@@ -50,31 +48,18 @@ export function EditorPage() {
     const addNote = useNotesStore((state) => state.addNote); // ✅ get addNote from store
     const updateNote = useNotesStore((state) => state.updateNote)
     const notes = useNotesStore((state) => state.notes);
-    // console.log("notes length inside editorPAge is = ", notes.length)
-    // console.log("rendedring")
-    // console.log(subject)
-    // console.log("rendered")
+    
     const fetchNotes = useNotesStore((state) => state.fetchNotes)
 
     useEffect(() => {
-       
             fetchNotes();
-            // console.log("fetchnotes runs inside editor page", notes.length)
-            // console.log("fetchnotes occured")
-        
-        // console.log("isnide fetchnotes use effect")
     }, [notes.length, fetchNotes]);
 
     const editor = useEditor({
         extensions,
         content: content,
     })
-    // const getTextFromEditor = (editor:any) => {
-    //     return editor.getText();
-    // };
-    // const plaintxt = getTextFromEditor(editor)
-    // console.log(getTextFromEditor(editor))
-    // console.log(plaintxt)
+
     if (!editor) {
         return null;
     }
@@ -83,7 +68,7 @@ export function EditorPage() {
         if (editor && content && !hasInitializedContent.current) {
             editor.commands.setContent(content);
             hasInitializedContent.current = true;
-            // console.log("initial content set");
+           
         }
     }, [editor, content]);
 

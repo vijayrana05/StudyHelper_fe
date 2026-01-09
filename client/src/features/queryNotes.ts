@@ -10,17 +10,17 @@ export async function searchAi(noteId: string, query: string): Promise<string> {
       body: JSON.stringify({ noteId, query }),
     });
 
-    // Optionally check for successful HTTP status
+    
     if (!res.ok) {
-      // You can specifically handle 503, 500, etc here if needed
+      
       throw new Error(`Server returned status ${res.status}`);
     }
 
     const data = await res.json();
-    // Defensive: Check the structure of the response before access
+    
     return data?.answer ?? "No answer found in response.";
   } catch (error) {
-    // Optionally you can log error.message or error.stack here
+  
     console.error("Frontend error calling backend:", error);
     return "AI service is temporarily unavailable. Please try again later.";
   }
